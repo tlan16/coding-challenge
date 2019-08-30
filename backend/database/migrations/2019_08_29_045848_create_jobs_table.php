@@ -13,7 +13,6 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        //job title,job description,date,location,applicants
         Schema::create('jobs', function (Blueprint $table): void {
             $table->increments('id');
             $table->text('job title');
