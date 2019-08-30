@@ -15,4 +15,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-require_once __DIR__ . '/job.php';
+$router->get('/jobs', [
+    'as' => 'jobs',
+    'uses' => 'JobController@list',
+]);
+
+$router->get('/job/{id:\d+}', [
+    'as' => 'jobs',
+    'uses' => 'JobController@get',
+]);
