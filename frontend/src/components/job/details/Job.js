@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {Applicants} from "./Applicants";
+import constants from '../../../constants';
+
 
 const Job = class extends React.Component {
     constructor(props, context) {
@@ -17,15 +19,13 @@ const Job = class extends React.Component {
         this.fetchJob()
     }
 
-    fetchJob() {
-        const API_ENDPOINT = `http://localhost:8000/job/${this.props.match.params.id}`;
-        fetch(API_ENDPOINT)
-            .then(response => response.json())
-            .then(job => {
-                this.setState(() => ({
-                    job,
-                }))
-            })
+    async fetchJob() {
+        const response = await fetch(`${constants.API_ENDPOINT}job/${this.props.match.params.id}`);
+        const job = await response.json();
+
+        this.setState(() => ({
+            job,
+        }));
     }
 
     render() {

@@ -1,5 +1,6 @@
 import React from 'react'
 import {Job} from './Job'
+import constants from '../../../constants';
 
 const Jobs = class extends React.Component {
     constructor(props, context) {
@@ -13,15 +14,13 @@ const Jobs = class extends React.Component {
         this.fetchJobs()
     }
 
-    fetchJobs() {
-        const API_ENDPOINT = 'http://localhost:8000/jobs';
-        fetch(API_ENDPOINT)
-            .then(response => response.json())
-            .then(jobs => {
-                this.setState(() => ({
-                    jobs,
-                }))
-            })
+    async fetchJobs() {
+        const response = await fetch(`${constants.API_ENDPOINT}jobs`);
+        const jobs = await response.json();
+
+        this.setState(() => ({
+            jobs,
+        }));
     }
 
     render() {
