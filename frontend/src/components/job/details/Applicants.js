@@ -11,7 +11,7 @@ const Applicants = class extends React.Component {
                 {
                     applicants.split(',').map(function (applicant, index) {
                         return [
-                            <span key={applicant}>{applicant}</span>,
+                            <span key={applicant} style={{textTransform: "capitalize"}}>{applicant}</span>,
                             index !== applicant.length && <br key={applicant+'_break'}/>,
                         ]
                     })
