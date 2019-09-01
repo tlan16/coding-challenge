@@ -11,16 +11,40 @@
 |
 */
 
+use App\Http\Middleware\CorsMiddleware;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/jobs', [
-    'as' => 'jobs',
-    'uses' => 'JobController@list',
-]);
+$router->group(
+    [
+        'name' => 'get jobs',
+        'prefix' => '/jobs',
+        'middleware' => CorsMiddleware::class . ':GET',
+    ],
+    function () use ($router): void {
+        $router->options('', []);
 
-$router->get('/job/{id:\d+}', [
-    'as' => 'jobs',
-    'uses' => 'JobController@get',
-]);
+        $router->get('', [
+            'as' => 'jobs',
+            'uses' => 'JobController@list',
+        ]);
+    }
+);
+
+$router->group(
+    [
+        'name' => 'get a job',
+        'prefix' => '/job/{id:\d+}',
+        'middleware' => CorsMiddleware::class . ':GET',
+    ],
+    function () use ($router) : void {
+        $router->options('', []);
+
+        $router->get('', [
+            'as' => 'jobs',
+            'uses' => 'JobController@get',
+        ]);
+    }
+);
