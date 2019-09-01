@@ -10,3 +10,16 @@
 ## Development
 * React frontend: http://localhost
 * Lumen backend: http://localhost:8000
+
+## Migrate and seed database
+Update fixture files at `backend/database/seeds/fixtures`
+
+Shell in to backend docker image
+```shell script
+docker-compose run --rm coding-challenge-backend bash
+```
+and run:
+```shell script
+php artisan migrate:fresh
+php artisan db:seed
+```
