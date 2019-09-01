@@ -75,6 +75,7 @@ const Job = class extends React.Component {
                         </table>
                     )
                 }
+                <br/>
                 <Link style={{float: 'left'}} to="/">Back</Link>
             </React.Fragment>
         )
